@@ -1,0 +1,14 @@
+#Ignores the jls temp files
+*~
+*.swp
+*.swo
+
+# ignore any diff/patch files
+*.diff
+*.patch
+*.log
+
+# eclipse settings files
+.project
+.pydevproject
+.settings
