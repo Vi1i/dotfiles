@@ -76,6 +76,7 @@ if has ("autocmd")
     filetype indent on
 endif
 set cursorline
+set background=dark
 colorscheme solarized
 
 set tabstop=4
