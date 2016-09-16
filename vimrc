@@ -14,6 +14,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'Tabular'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Yggdroot/indentLine'
+Plugin 'mhinz/vim-signify'
 Bundle 'git://github.com/bling/vim-airline'
 Bundle 'vim-ruby/vim-ruby'
 
@@ -60,7 +61,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-"syntax on
 syntax enable
 " Turn off vi compatibility
 set nocompatible
@@ -75,15 +75,15 @@ if has ("autocmd")
     filetype indent on
 endif
 set cursorline
-"let g:solarized_tdermcolors=256
 set term=xterm-256color
 set background=dark
 colorscheme default
 
-
 set tabstop=4
 set expandtab
 set shiftwidth=4
+
+set backspace=indent,eol,start
 
 set nu
 
@@ -124,3 +124,5 @@ augroup configgroup
     autocmd BufEnter *.sh setlocal shiftwidth=2
     autocmd BufEnter *.sh setlocal softtabstop=2
 augroup END
+
+let g:Powerline_symbols = 'fancy'
