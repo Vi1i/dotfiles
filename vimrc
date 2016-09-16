@@ -10,12 +10,10 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'kien/ctrlp.vim'
 Plugin 'Tabular'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'mhinz/vim-signify'
+Plugin 'Yggdroot/indentLine'
 Bundle 'git://github.com/bling/vim-airline'
 Bundle 'vim-ruby/vim-ruby'
 
@@ -40,7 +38,7 @@ Bundle 'vim-ruby/vim-ruby'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+"filetype plugin o
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -62,7 +60,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-syntax on
+"syntax on
+syntax enable
 " Turn off vi compatibility
 set nocompatible
 
@@ -76,8 +75,11 @@ if has ("autocmd")
     filetype indent on
 endif
 set cursorline
+"let g:solarized_tdermcolors=256
+set term=xterm-256color
 set background=dark
-colorscheme solarized
+colorscheme default
+
 
 set tabstop=4
 set expandtab
@@ -85,15 +87,17 @@ set shiftwidth=4
 
 set nu
 
+"For C++ std 11 higlighting for syntastic
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+
 "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 "match OverLength /\%81v.\+/
 
-"So ctrlP doesn't search the root and up
-noremap <C-P> <Esc>:CtrlP $HOME<CR>
-"For the column in guttervim to clear correctly
-highlight clear SignColumn
-
 let g:airline_powerline_fonts = 1
+
+"IndentLine Coloring
+let g:indentLine_color_term = 239
 
 augroup configgroup
     autocmd!
