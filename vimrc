@@ -80,8 +80,9 @@ set background=dark
 colorscheme default
 
 set tabstop=4
-set expandtab
 set shiftwidth=4
+set softtabstop=4
+set expandtab
 
 set backspace=indent,eol,start
 
@@ -102,7 +103,7 @@ let g:indentLine_color_term = 239
 augroup configgroup
     autocmd!
     autocmd VimEnter * highlight clear SignColumn
-    autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md
+    autocmd BufWritePre *.php,*.py,*.txt,*.hs,*.java,*.md
                 \:call <SID>StripTrailingWhitespaces()
     autocmd FileType java setlocal noexpandtab
     autocmd FileType java setlocal list
