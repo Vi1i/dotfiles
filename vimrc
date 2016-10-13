@@ -15,7 +15,7 @@ Plugin 'Tabular'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Yggdroot/indentLine'
 Plugin 'mhinz/vim-signify'
-Bundle 'git://github.com/bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Bundle 'vim-ruby/vim-ruby'
 
 
