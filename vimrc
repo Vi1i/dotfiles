@@ -16,7 +16,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'Yggdroot/indentLine'
 Plugin 'mhinz/vim-signify'
 Plugin 'vim-airline/vim-airline'
-Bundle 'vim-ruby/vim-ruby'
+Plugin 'ryanoasis/vim-devicons'
 
 
 "" The following are examples of different formats supported.
