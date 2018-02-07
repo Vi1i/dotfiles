@@ -17,10 +17,10 @@ font pango:DejaVu Sans Mono 8
 
 new_window none
 for_window [class="^.*"] border pixel none
+for_window [class="^.*"] border pixel 0
 hide_edge_borders both
 gaps inner 10
 gaps outer 5
-exec_always --no-startup-id feh --bg-scale ~/Pictures/Backgrounds/ChineseMinimalMountain.jpg
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -85,7 +85,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # 
-bindsym $mod+Shift+x exec $HOME/.bin/lock.sh
+bindsym $mod+Shift+x exec $HOME/.scripts/lock.sh
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -146,4 +146,4 @@ bindsym $mod+r mode "resize"
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id compton --backend glx
-
+exec_always --no-startup-id feh --bg-scale ~/Pictures/Backgrounds/RedFallDeath.jpg
