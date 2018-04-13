@@ -8,6 +8,13 @@
 #  * CPU
 #  * Memory
 
+. $HOME/.config/pc/lemonbar.conf
+
+if [ $(pgrep -cx $(basename $0)) -gt 1 ] ; then
+  printf "%s\n" "The status bar is already running." >&2
+  exit 1
+fi
+
 FONT1=""
 FONT2="Font Awesome 5 Pro Regular:size=18"
 
