@@ -9,7 +9,6 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-" Plugin 'scrooloose/syntastic'         " To much, espectially for larger projects
 Plugin 'tpope/vim-surround'
 Plugin 'Tabular'
 Plugin 'airblade/vim-gitgutter'
@@ -22,12 +21,6 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'vim-scripts/scrollfix'
 Plugin 'scrooloose/nerdtree'
 Bundle 'dsimidzija/vim-nerdtree-ignore'
-Plugin 'majutsushi/tagbar'
-Plugin 'ledger/vim-ledger'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
 
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
