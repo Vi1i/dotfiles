@@ -9,15 +9,25 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'         " To much, espectially for larger projects
 Plugin 'tpope/vim-surround'
 Plugin 'Tabular'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Yggdroot/indentLine'
 Plugin 'mhinz/vim-signify'
 Plugin 'vim-airline/vim-airline'
-Bundle 'vim-ruby/vim-ruby'
-
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'vim-python/python-syntax'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'vim-scripts/scrollfix'
+Plugin 'scrooloose/nerdtree'
+Bundle 'dsimidzija/vim-nerdtree-ignore'
+Plugin 'majutsushi/tagbar'
+Plugin 'ledger/vim-ledger'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
 
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
@@ -52,48 +62,92 @@ filetype plugin indent on    " required
 
 set laststatus=2
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   Syntastic
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_cpp_compiler = 'g++'
+"let g:syntastic_cpp_compiler_options = ' -std=c++11'
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   Tagbar
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_width=50
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   Ledger
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufNewFile,BufRead *.ldg,*.ledger setf ledger | comp ledger
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   Vim settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set cursorline
+set term=xterm-256color
+colorscheme default
 syntax enable
-" Turn off vi compatibility
 set nocompatible
-
 set smartindent
 set autoindent
 "set cindent
-
-" load indent file for the current filetype
-if has ("autocmd")
-    filetype plugin on
-    filetype indent on
-endif
-set cursorline
-set term=xterm-256color
-set background=dark
-colorscheme default
-
+"
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
-
 set backspace=indent,eol,start
-
 set nu
 
-"For C++ std 11 higlighting for syntastic
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
+highlight ColorColumn ctermfg=white
+call matchadd('ColorColumn', '\%81v', 100)
+highlight OverLength ctermfg=magenta guibg=#592929
+match OverLength /\%82v.\+/
 
-"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-"match OverLength /\%81v.\+/
+
+if has ("autocmd")
+    filetype plugin on
+    filetype indent on
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   CPP Enhanced Highlight
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+"let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   ScrollFix
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"     let g:scrollfix=100 " means lock cursor at bottom of window
+"     let g:scrollfix=0   " means keep cursor at top line of window
+"     let g:scrollfix=50  " means middle line of screen
+"     let g:scrollfix=66  " means two-third from top of screen
+let g:scrollfix=66
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   NerdTree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable python highlighting:
+let g:python_highlight_all = 1
 
 let g:airline_powerline_fonts = 1
 
@@ -103,7 +157,7 @@ let g:indentLine_color_term = 239
 augroup configgroup
     autocmd!
     autocmd VimEnter * highlight clear SignColumn
-    autocmd BufWritePre *.php,*.py,*.txt,*.hs,*.java,*.md
+    autocmd BufWritePre *.php,*.hs,*.java,*.md
                 \:call <SID>StripTrailingWhitespaces()
     autocmd FileType java setlocal noexpandtab
     autocmd FileType java setlocal list
@@ -127,3 +181,9 @@ augroup configgroup
 augroup END
 
 let g:Powerline_symbols = 'fancy'
+
+nmap <F3> i<C-R>=strftime("%Y-%m-%dT%H:%M:%S%z")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y-%m-%dT%H:%M:%S%z")<CR>
+
+nmap <F4> i<C-R>=readfile(glob("~/.vim/templates/NotePad.txt"))<CR><ESC>
+imap <F4> <C-R>=readfile(glob("~/.vim/templates/NotePad.txt"))<CR>
