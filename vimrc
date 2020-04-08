@@ -16,7 +16,6 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'mhinz/vim-signify'
 Plugin 'vim-airline/vim-airline'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'vim-python/python-syntax'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'vim-scripts/scrollfix'
 Plugin 'scrooloose/nerdtree'
@@ -91,7 +90,9 @@ set nocompatible
 set smartindent
 set autoindent
 "set cindent
-"
+
+" This removes a weird garbled race condition I think
+set t_RV=
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -99,11 +100,11 @@ set expandtab
 set backspace=indent,eol,start
 set nu
 
-highlight ColorColumn ctermfg=white
-call matchadd('ColorColumn', '\%81v', 100)
-highlight OverLength ctermfg=magenta guibg=#592929
-match OverLength /\%82v.\+/
-
+"" Adds a highlighter for catching line length, it is kind of annoying to be honest.
+"highlight ColorColumn ctermfg=white
+"call matchadd('ColorColumn', '\%81v', 100)
+"highlight OverLength ctermfg=magenta guibg=#592929
+"match OverLength /\%82v.\+/
 
 if has ("autocmd")
     filetype plugin on
@@ -141,9 +142,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable python highlighting:
 let g:python_highlight_all = 1
-
 let g:airline_powerline_fonts = 1
-
 "IndentLine Coloring
 let g:indentLine_color_term = 239
 
@@ -174,9 +173,3 @@ augroup configgroup
 augroup END
 
 let g:Powerline_symbols = 'fancy'
-
-nmap <F3> i<C-R>=strftime("%Y-%m-%dT%H:%M:%S%z")<CR><Esc>
-imap <F3> <C-R>=strftime("%Y-%m-%dT%H:%M:%S%z")<CR>
-
-nmap <F4> i<C-R>=readfile(glob("~/.vim/templates/NotePad.txt"))<CR><ESC>
-imap <F4> <C-R>=readfile(glob("~/.vim/templates/NotePad.txt"))<CR>
